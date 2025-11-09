@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fahimul Islam Fahim | WordPress Website Developer</title>
+    <meta name="description" content="Fahimul Islam Fahim — I develop modern, secure & conversion-focused WordPress websites that help businesses grow.">
+    <meta name="color-scheme" content="dark light">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    
+    <!-- Open Graph / Twitter Card Meta Tags -->
+    <meta property="og:title" content="Fahimul Islam Fahim | WordPress Website Developer">
+    <meta property="og:description" content="I develop modern, secure & conversion-focused WordPress websites that help businesses grow.">
+    <meta property="og:type" content="website">
+
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "FAHIMUL ISLAM FAHIM",
+      "jobTitle": "WordPress Website Developer",
+      "url": "https://dev-logicalfahim.pantheonsite.io",
+      "sameAs": [
+        "https://linkedin.com/in/fahimulislamfahim/",
+        "https://github.com/yourhandle"
+      ],
+      "email": "mailto:austfahim@gmail.com"
+    }
+    </script>
+    
+    <style>
+        /* ======================================= */
+        /* 1. CSS Reset & Base Styles              */
+        /* ======================================= */
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        /* Modern Reset */
+        body, h1, h2, h3, p, ul, ol, figure, blockquote, dl, dd {
+            margin: 0;
+            padding: 0;
+        }
+        ul { list-style: none; }
+
+        /* Color Themes & Variables */
+        :root {
+            /* Light Theme Defaults */
+            --primary: #4F46E5;
+            --accent: #10B981;
+            --bg: #F8FAFC;
+            --fg: #0F172A;
+            --muted: #64748B;
+            --card: #FFFFFF;
+            --border: rgba(15, 23, 42, 0.1);
+            --shadow: 0 8px 30px rgba(0,0,0,.1);
+            
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --timing: 0.3s ease-out;
+            --header-height: 64px; /* For header overlap fix */
+        }
+        [data-theme="dark"] {
+            /* Dark Theme Overrides */
+            --primary: #818CF8;
+            --accent: #34D399;
+            --bg: #0B0F19;
+            --fg: #E2E8F0;
+            --muted: #94A3B8;
+            --card: rgba(255,255,255,.06);
+            --border: rgba(226, 232, 240, 0.1);
+            --shadow: 0 8px 30px rgba(0,0,0,.4);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--fg);
+            line-height: 1.6;
+            min-height: 100vh;
+            color-scheme: dark light;
+            transition: background-color var(--timing), color var(--timing);
+        }
+
+        /* Fluid Typography Rules (Mandatory) */
+        h1 { font-size: clamp(2rem, 6vw, 3.5rem); }
+        h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+        p, a, span { font-size: clamp(.9rem, 1.6vw, 1.1rem); }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color var(--timing), opacity var(--timing);
+        }
+
+        button {
+            cursor: pointer;
+            padding: 0;
+            border: none;
+            background: none;
+        }
+
+        /* Helper for screen reader text */
+        .sr-only{position:absolute;clip:rect(1px,1px,1px,1px);padding:0;border:0;height:1px;width:1px;overflow:hidden;white-space:nowrap}
+
+        /* Focus States & Accessibility (Ensuring button hit area is large enough) */
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 4px;
+            border-radius: var(--radius-md);
+        }
+        /* Touch target adjustment for icon buttons */
+        .theme-toggle, .floating-whatsapp {
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            :where(*) {
+                transition-duration: 0.001ms !important;
+                animation-duration: 0.001ms !important;
+                animation-delay: -1ms !important;
+                transform: none !important;
+            }
+        }
+
+
+        /* ======================================= */
+        /* 2. Global Layout & Utilities            */
+        /* ======================================= */
+
+        /* Mandatory Container (FIXED) */
+        .container {
+            width: 100%;
+            max-width: 1240px;
+            margin-inline: auto;
+            padding-inline: clamp(1rem, 3vw, 2rem);
+        }
+
+        /* Mandatory Section Padding (FIXED) */
+        section {
+            padding-block: clamp(3rem, 6vw, 6rem);
+            /* Fix for sticky header overlap on scroll target */
+            scroll-margin-top: var(--header-height);
+        }
+
+        /* Mandatory Flex Layout */
+        .flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Mandatory Responsive Grid System (FIXED) */
+        .grid {
+            display: grid;
+            gap: clamp(1rem, 2vw, 2rem);
+        }
+        @media (min-width: 600px) { .grid-2 { grid-template-columns: repeat(2,1fr); } }
+        @media (min-width: 900px) { .grid-3 { grid-template-columns: repeat(3,1fr); } }
+        @media (min-width: 1200px){ .grid-4 { grid-template-columns: repeat(4,1fr); } }
+
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.85rem 1.75rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            transition: background-color var(--timing), transform var(--timing), box-shadow var(--timing);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            min-height: 44px; /* Ensure sufficient touch target */
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--fg);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--fg);
+            border: 2px solid var(--border);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+            opacity: 1; 
+        }
+
+        /* Card Base (Glassmorphism) */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            transition: transform var(--timing), box-shadow var(--timing);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            will-change: transform, box-shadow;
+        }
+        [data-theme="light"] .card:hover {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+
+        /* ======================================= */
+        /* 3. Animations & Reveal (IntersectionObserver) */
+        /* ======================================= */
+
+        .reveal-section > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal-section > *:nth-child(1) { transition-delay: 0.1s; }
+        .reveal-section > *:nth-child(2) { transition-delay: 0.2s; }
+        .reveal-section > *:nth-child(3) { transition-delay: 0.3s; }
+
+        .reveal-section.in-view > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* ======================================= */
+        /* 4. Header & Navigation                  */
+        /* ======================================= */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding: 1rem 0;
+            height: var(--header-height); /* Fixed height for scroll calculation */
+            /* Dark blur base and glass effect */
+            background: rgba(11, 15, 25, 0.85); 
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border);
+            transition: background-color var(--timing);
+        }
+        [data-theme="light"] header {
+            background: rgba(248, 250, 252, 0.9);
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            padding: 0.5rem 0.75rem;
+            margin: 0 0.25rem;
+            position: relative;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        /* Ensure nav items are visible when space allows */
+        @media (max-width: 1100px) {
+            .nav-links { display: none; }
+            .nav-menu-desktop { justify-content: flex-end; }
+        }
+        @media (min-width: 1101px) {
+             .nav-links { display: flex; align-items: center; }
+        }
+        .theme-toggle {
+            width: 36px; height: 36px; border-radius: 50%; color: var(--muted);
+            background: var(--card); border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+
+        /* ======================================= */
+        /* 5. Hero Section (FIXED: Added margin-top) */
+        /* ======================================= */
+        #home {
+            /* Pushes hero down to start below the sticky header */
+            margin-top: calc(-1 * var(--header-height)); 
+            padding-top: var(--header-height); /* Replaces padding removed by margin-top */
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+        }
+        .hero-image {
+            width: 160px; height: 160px; border-radius: 50%; background: var(--primary); 
+            border: 4px solid var(--accent); margin-bottom: 1.5rem; box-shadow: var(--shadow); 
+            display: flex; align-items: center; justify-content: center;
+        }
+        .hero-title {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+        .hero-subtitle-tag {
+            color: var(--muted);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem;}
+        .hero-socials { display: flex; gap: 1.5rem; padding: 1rem; border-radius: var(--radius-md); background: var(--card); border: 1px solid var(--border);}
+        .hero-socials a { color: var(--fg); display: flex; align-items: center; gap: 0.5rem;}
+
+
+        /* ======================================= */
+        /* 6. About Section (FIXED: Grid definition) */
+        /* ======================================= */
+        .about-text { max-width: 700px; margin-bottom: 2rem; }
+        .stat-item { padding: 1.5rem 1rem; text-align: center; }
+        .stat-value { font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; }
+        .stat-label { font-size: 0.9rem; color: var(--fg); margin-top: 0.5rem; }
+
+        /* Custom about grid layout for stats */
+        .about-grid {
+             display: grid;
+             gap: clamp(1rem, 2vw, 2rem);
+        }
+        /* Stats row on desktop */
+        @media (min-width: 600px) {
+            .about-grid {
+                 grid-template-columns: repeat(3, 1fr);
+            }
+            .about-text {
+                 grid-column: 1 / -1;
+            }
+        }
+
+
+        /* ======================================= */
+        /* 7. Skills Section (FIXED: Grid definition) */
+        /* ======================================= */
+        .skill-group-title {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .skill-badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .skill-badge {
+            background-color: var(--primary);
+            color: var(--bg);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+
+        /* ======================================= */
+        /* 8. Services Section (REMOVED)           */
+        /* ======================================= */
+
+
+        /* ======================================= */
+        /* 9. Portfolio Section (FIXED: Grid definition) */
+        /* ======================================= */
+        /* Added padding to card content */
+        .portfolio-card {
+            display: block; /* Ensure it behaves like a block element */
+        }
+
+        .portfolio-card-content {
+            padding: 1.5rem; /* Padding for the content area */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: var(--primary);
+            border-radius: var(--radius-md);
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        .tag-pill {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.75rem;
+            border-radius: 9999px;
+            background: var(--card);
+            color: var(--muted);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--border);
+        }
+
+
+        /* ======================================= */
+        /* 10. Experience Section (Timeline)       */
+        /* ======================================= */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--card);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            z-index: 1;
+            border-radius: 2px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 100%; /* Default to full width on mobile */
+            transition: opacity 0.6s ease;
+            opacity: 0;
+        }
+        .timeline-item.in-view { opacity: 1; }
+        .timeline-item:nth-child(even) { left: 0%; } /* Default to left on mobile */
+        .timeline-content { padding: 20px 30px; border-radius: var(--radius-md); background: var(--card); border: 1px solid var(--border); }
+        .timeline-item::after {
+            content: ''; position: absolute; width: 16px; height: 16px; right: auto; left: 23px;
+            background-color: var(--accent); border: 4px solid var(--bg); top: 24px; border-radius: 50%; z-index: 2;
+        }
+        .experience-bullet-list li { color: var(--muted); margin-top: 0.5rem; position: relative; padding-left: 1rem; }
+        .experience-bullet-list li::before { content: '•'; color: var(--accent); position: absolute; left: 0; }
+        
+        /* Desktop Timeline Layout */
+        @media (min-width: 768px) {
+             .timeline-item { width: 50%; }
+             .timeline::after { left: 50%; }
+             .timeline-item:nth-child(even) { left: 50%; padding-left: 70px; padding-right: 20px; }
+             .timeline-item:nth-child(odd) { left: 0%; padding-right: 70px; padding-left: 20px; }
+             .timeline-item:nth-child(odd)::after { right: -8px; left: auto; }
+             .timeline-item:nth-child(even)::after { left: -8px; right: auto; }
+        }
+
+
+        /* ======================================= */
+        /* 11. Contact Section (FIXED: Grid definition) */
+        /* ======================================= */
+        .contact-card { padding: 2rem; text-align: center; }
+        .contact-icon { width: 48px; height: 48px; color: var(--primary); margin: 0 auto 1rem; }
+        .contact-info { font-weight: 600; color: var(--fg); margin-bottom: 0.5rem; }
+        .contact-action { 
+            color: var(--muted); text-decoration: underline; cursor: pointer;
+            min-width: 44px; min-height: 44px; /* Touch target */
+            display: inline-block;
+        }
+        /* Contact Grid for 2-3 columns */
+        .contact-grid {
+             display: grid;
+             gap: clamp(1rem, 2vw, 2rem);
+        }
+        @media (min-width: 700px) {
+             .contact-grid {
+                 grid-template-columns: repeat(3, 1fr);
+             }
+        }
+
+        /* Copy Toast/Tooltip */
+        #copy-toast {
+            position: fixed; bottom: 50px; right: 50px; background-color: var(--accent); color: var(--bg);
+            padding: 1rem 1.5rem; border-radius: var(--radius-md); font-weight: 600; opacity: 0; visibility: hidden;
+            transition: opacity 0.3s, transform 0.3s, visibility 0.3s; z-index: 100; transform: translateY(20px);
+            /* Z-index fix for toast visibility */
+            z-index: 1000;
+        }
+        #copy-toast.show { opacity: 1; visibility: visible; transform: translateY(0); }
+
+
+        /* ======================================= */
+        /* 12. Footer & Floating Button            */
+        /* ======================================= */
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+        }
+        .floating-whatsapp {
+            position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%;
+            background-color: #25D366; color: white; display: flex; align-items: center;
+            justify-content: center; z-index: 99; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s ease-in-out;
+            z-index: 900; /* Ensure high stacking order */
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- Skip Link (Hidden, for accessibility) -->
+    <a href="#main-content" class="sr-only" style="position: absolute; top: 0; left: 0; z-index: 9999; background: var(--accent); color: var(--bg); padding: 10px;">Skip to main content</a>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container flex">
+            <h1 class="nav-logo">
+                <a href="#home">Fahim.</a>
+            </h1>
+            <nav class="nav-menu-desktop flex" role="navigation" aria-label="Main Navigation">
+                <div class="nav-links flex">
+                    <a href="#home" class="nav-link active" data-target="home">Home</a>
+                    <a href="#about" class="nav-link" data-target="about">About</a>
+                    <a href="#skills" class="nav-link" data-target="skills">Skills</a>
+                    <a href="#portfolio" class="nav-link" data-target="portfolio">Portfolio</a>
+                    <a href="#experience" class="nav-link" data-target="experience">Experience</a>
+                    <a href="#contact" class="nav-link" data-target="contact">Contact</a>
+                </div>
+                <button id="theme-toggle" aria-label="Toggle Dark/Light Theme" class="theme-toggle">
+                    <!-- Sun Icon (Dark Mode Default) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-sun-icon"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+                    <!-- Moon Icon (Light Mode) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-moon-icon" style="display: none;"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" role="main">
+        <!-- ===== Home (Hero) Section ===== -->
+        <section id="home" class="reveal-section">
+            <div class="container hero-content">
+                <div class="hero-image" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Profile Placeholder Icon" style="width: 80px; height: 80px; color: var(--fg);">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <h1 class="hero-title">FAHIMUL ISLAM FAHIM</h1>
+                <h3 class="hero-subtitle-tag">WordPress Website Developer</h3>
+                <p class="hero-subtitle-tag">“I build modern, secure & conversion-focused WordPress websites.”</p>
+                
+                <div class="hero-cta">
+                    <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
+                    <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                </div>
+
+                <div class="hero-socials">
+                    <a href="https://linkedin.com/in/fahimulislamfahim/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/yourhandle" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3-1 6-4 6-8s-2-8-6-8c-.9 0-2 0-3 0 0-1-1.5-2.5-3-2.5s-3 1.5-3 2.5c-4 0-6 3-6 8s3 7 6 8c-1 0-2 0-3 0v4"></path><path d="M9 18c0 1 2 2 3 2s3-1 3-2"></path></svg>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== About Section ===== -->
+        <section id="about" class="reveal-section">
+            <div class="container">
+                <h2>My WordPress Journey</h2>
+                
+                <div class="about-grid">
+                    <div class="about-text" style="grid-column: 1 / -1; max-width: 900px; margin: 0 auto;">
+                        <p>I'm Fahimul Islam Fahim, a dedicated **WordPress Website Developer**. For **over 3 years**, I've focused exclusively on the WordPress ecosystem, mastering theme and plugin development to deliver highly tailored digital solutions. I specialize in building custom business sites, complex e-commerce stores using **WooCommerce**, and high-performance digital marketing pages.</p>
+                        <p>My work is guided by the philosophy that a website must be a business asset. I adhere to strict standards for **clean UI/UX**, robust **SEO structure**, and **mobile-first design** to ensure your online presence is fast, accessible, and drives **conversions**.</p>
+                    </div>
+                    
+                    <!-- Stats Grid -->
+                    <div class="stat-item card">
+                        <span class="stat-value">3+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-item card">
+                        <span class="stat-value" style="color:var(--accent);">120+</span>
+                        <span class="stat-label">Projects Completed</span>
+                    </div>
+                    <div class="stat-item card">
+                        <span class="stat-value">99%</span>
+                        <span class="stat-label">Client Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Skills Section ===== -->
+        <section id="skills" class="reveal-section">
+            <div class="container">
+                <h2>Skills & Technologies</h2>
+                <!-- Apply mandatory grid classes here -->
+                <div class="skills-grid grid grid-2 grid-4">
+                    <!-- Category 1: WordPress Core -->
+                    <div class="card skill-item">
+                        <h3 class="skill-group-title">WordPress Core & Fundamentals</h3>
+                        <div class="skill-badge-grid">
+                            <span class="skill-badge">WordPress Setup & Customization</span>
+                            <span class="skill-badge">Theme/Plugin Management</span>
+                            <span class="skill-badge">WordPress Migration</span>
+                            <span class="skill-badge">Hosting / cPanel / Domain Setup</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 2: Page Builders & Design -->
+                    <div class="card skill-item">
+                        <h3 class="skill-group-title">Page Builders & UI/UX</h3>
+                        <div class="skill-badge-grid">
+                            <span class="skill-badge">Elementor & Elementor Pro</span>
+                            <span class="skill-badge">Gutenberg Block Editor</span>
+                            <span class="skill-badge">WPBakery</span>
+                            <span class="skill-badge">Graphic Design (Figma)</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Category 3: eCommerce -->
+                    <div class="card skill-item">
+                        <h3 class="skill-group-title">eCommerce & WooCommerce</h3>
+                        <div class="skill-badge-grid">
+                            <span class="skill-badge">WooCommerce Setup & Customization</span>
+                            <span class="skill-badge">Product Variations & Logic</span>
+                            <span class="skill-badge">Payment Gateways</span>
+                            <span class="skill-badge">Invoice & Order Email Customizations</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 4: Frontend & Optimization -->
+                    <div class="card skill-item">
+                        <h3 class="skill-group-title">Frontend, Performance & SEO</h3>
+                        <div class="skill-badge-grid">
+                            <span class="skill-badge">HTML5 / CSS3 / Responsive Design</span>
+                            <span class="skill-badge">Basic JavaScript (Vanilla)</span>
+                            <span class="skill-badge">Speed Optimization (Cache/CDN)</span>
+                            <span class="skill-badge">On-Page SEO Structure & Schema</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Portfolio Section ===== -->
+        <section id="portfolio" class="reveal-section">
+            <div class="container">
+                <h2>Selected WordPress Projects</h2>
+                <!-- Apply mandatory grid classes here -->
+                <div class="portfolio-grid grid grid-2 grid-3">
+                    
+                    <!-- Project 1: E-commerce -->
+                    <a href="/projects/custom-ecommerce" class="card portfolio-card" data-tilt="true" aria-label="View Project: High-Performance E-commerce Store">
+                        <div class="project-image-placeholder"></div>
+                        <div class="portfolio-card-content">
+                            <h3 class="project-title">Custom WooCommerce Store</h3>
+                            <p class="project-subtitle" style="color:var(--muted); font-size:0.9rem;">Robust online shop with integrated payment and custom variations.</p>
+                            <div class="project-tags flex" style="justify-content: flex-start; margin-top: 0.5rem;">
+                                <span class="tag-pill">WooCommerce</span>
+                                <span class="tag-pill">Elementor Pro</span>
+                                <span class="tag-pill">Speed Optimized</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 2: Corporate Site -->
+                    <a href="/projects/corporate-redesign" class="card portfolio-card" data-tilt="true" aria-label="View Project: Corporate Website Redesign">
+                        <div class="project-image-placeholder"></div>
+                        <div class="portfolio-card-content">
+                            <h3 class="project-title">Corporate Landing Page</h3>
+                            <p class="project-subtitle" style="color:var(--muted); font-size:0.9rem;">Lead-focused design emphasizing modern UI and mobile responsiveness.</p>
+                            <div class="project-tags flex" style="justify-content: flex-start; margin-top: 0.5rem;">
+                                <span class="tag-pill">Gutenberg</span>
+                                <span class="tag-pill">Responsive Design</span>
+                                <span class="tag-pill">SEO Structure</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 3: Blog Optimization -->
+                    <a href="/projects/blog-optimization-case" class="card portfolio-card" data-tilt="true" aria-label="View Project: High-Traffic Blog Optimization">
+                        <div class="project-image-placeholder"></div>
+                        <div class="portfolio-card-content">
+                            <h3 class="project-title">High-Traffic Blog Platform</h3>
+                            <p class="project-subtitle" style="color:var(--muted); font-size:0.9rem;">Performance audit and server configuration for massive content site.</p>
+                            <div class="project-tags flex" style="justify-content: flex-start; margin-top: 0.5rem;">
+                                <span class="tag-pill">Caching/CDN</span>
+                                <span class="tag-pill">cPanel/Hosting</span>
+                                <span class="tag-pill">Performance</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Project 4: Security Portal -->
+                    <a href="/projects/secure-portal" class="card portfolio-card" data-tilt="true" aria-label="View Project: Secured User Portal">
+                        <div class="project-image-placeholder"></div>
+                        <div class="portfolio-card-content">
+                            <h3 class="project-title">Membership Secure Portal</h3>
+                            <p class="project-subtitle" style="color:var(--muted); font-size:0.9rem;">Protected content delivery with security hardening best practices.</p>
+                            <div class="project-tags flex" style="justify-content: flex-start; margin-top: 0.5rem;">
+                                <span class="tag-pill">Security</span>
+                                <span class="tag-pill">Custom PHP</span>
+                                <span class="tag-pill">WPBakery</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 5: Redesign -->
+                    <a href="/projects/redesign-case" class="card portfolio-card" data-tilt="true" aria-label="View Project: Legacy Website Redesign">
+                        <div class="project-image-placeholder"></div>
+                        <div class="portfolio-card-content">
+                            <h3 class="project-title">Legacy Website Redesign</h3>
+                            <p class="project-subtitle" style="color:var(--muted); font-size:0.9rem;">Complete visual and structural overhaul for a modern look.</p>
+                            <div class="project-tags flex" style="justify-content: flex-start; margin-top: 0.5rem;">
+                                <span class="tag-pill">Migration</span>
+                                <span class="tag-pill">Figma Design</span>
+                                <span class="tag-pill">HTML/CSS</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 6: Small Business -->
+                    <a href="/projects/small-biz" class="card portfolio-card" data-tilt="true" aria-label="View Project: Small Business Directory Site">
+                        <div class="project-image-placeholder"></div>
+                        <div class="portfolio-card-content">
+                            <h3 class="project-title">Local Directory Listing</h3>
+                            <p class="project-subtitle" style="color:var(--muted); font-size:0.9rem;">Simple, fast, and SEO-friendly site for local service providers.</p>
+                            <div class="project-tags flex" style="justify-content: flex-start; margin-top: 0.5rem;">
+                                <span class="tag-pill">Local SEO</span>
+                                <span class="tag-pill">Custom Post Types</span>
+                                <span class="tag-pill">WordPress</span>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Experience Section (Timeline) ===== -->
+        <section id="experience" class="reveal-section">
+            <div class="container">
+                <h2>Work Experience & History</h2>
+                <div class="timeline">
+                    <!-- Experience 1: Shorobor Studio -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="experience-date" style="font-size: 0.9rem; color: var(--muted);">03/2022 – 09/2025 | Banasree, Dhaka</span>
+                            <h3 class="experience-title" style="color: var(--primary);">Web Designer & Developer</h3>
+                            <p class="experience-subtitle" style="font-size: 1rem; color: var(--fg); margin-bottom: 0.5rem;">Shorobor Studio</p>
+                            <ul class="experience-bullet-list">
+                                <li>Built websites with tailored functionalities, combining creativity and technical finesse.</li>
+                                <li>Ensured all projects utilized strong SEO structure and mobile-first responsive design.</li>
+                                <li>Specialized in creating engaging online platforms that reflected unique brand identities.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Experience 2: Mtrack -->
+                    <div class="timeline-item" style="text-align: right;">
+                        <div class="timeline-content">
+                            <span class="experience-date" style="font-size: 0.9rem; color: var(--muted);">10/2020 – 09/2021 | Uttara, Dhaka</span>
+                            <h3 class="experience-title" style="color: var(--primary);">IT Support & Development</h3>
+                            <p class="experience-subtitle" style="font-size: 1rem; color: var(--fg); margin-bottom: 0.5rem;">Mtrack</p>
+                            <ul class="experience-bullet-list">
+                                <li>Executed strategic website creation and managed maintenance for the vehicle tracking system.</li>
+                                <li>Provided comprehensive IT solutions to enhance operational efficiency and technological growth.</li>
+                                <li>Focused on site speed optimization and security hardening for critical systems.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===== Contact Section ===== -->
+        <section id="contact" class="reveal-section">
+            <div class="container">
+                <h2>Let's Talk Business</h2>
+                <p style="text-align: center; color: var(--muted); margin-bottom: clamp(1.5rem, 3vw, 3rem);">Ready to start your next project? Reach out directly using the channels below—I respond quickly.</p>
+                
+                <!-- Apply mandatory grid classes here -->
+                <div class="contact-grid grid grid-2 grid-3">
+                    <!-- Contact Card 1: Email -->
+                    <div class="card contact-card">
+                        <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <div class="contact-info" id="email-display">austfahim@gmail.com</div>
+                        <button class="contact-action" id="contact-copy-btn" aria-live="polite">Click to Copy</button>
+                    </div>
+                    
+                    <!-- Contact Card 2: WhatsApp -->
+                    <div class="card contact-card">
+                        <svg class="contact-icon" style="color:#25D366;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.95M1 10.9v5.1a2 2 0 0 0 2 2h3.1l-1.3 4.2 4.2-1.3L15 22h5.1a2 2 0 0 0 2-2v-5.1l-4.2 1.3-1.3-4.2L7 4.9H3a2 2 0 0 0-2 2z"></path></svg>
+                        <div class="contact-info">+880 1721-214554</div>
+                        <a href="https://wa.me/8801721214554" target="_blank" rel="noopener noreferrer" class="contact-action">Chat on WhatsApp</a>
+                    </div>
+
+                    <!-- Contact Card 3: LinkedIn -->
+                    <div class="card contact-card">
+                        <svg class="contact-icon" style="color:#0A66C2;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        <div class="contact-info">Connect Professionally</div>
+                        <a href="https://linkedin.com/in/fahimulislamfahim/" target="_blank" rel="noopener noreferrer" class="contact-action">View LinkedIn Profile</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/8801721214554" class="floating-whatsapp" target="_blank" rel="noopener noreferrer" title="Chat on WhatsApp">
+        <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.58 15.35 3.39 16.85L2.06 22L7.3 20.65C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.91C21.95 6.45 17.5 2 12.04 2ZM17.65 15.14C17.43 15.65 16.2 16.27 15.61 16.36C15.03 16.45 14.45 16.44 13.88 16.24C12.08 15.63 10.5 14.49 9.17 12.98C8.04 11.83 7.37 10.53 7.15 9.94C6.94 9.35 7.07 8.8 7.33 8.54C7.51 8.35 7.74 8.24 7.96 8.08C8.21 7.93 8.48 7.8 8.64 8.04C8.82 8.28 9.07 8.87 9.11 8.98C9.14 9.09 9.14 9.29 9.01 9.47C8.88 9.66 8.78 9.88 8.64 10.04C8.48 10.19 8.31 10.35 8.44 10.6C8.61 10.87 10.19 13.25 12.54 14.39C14.34 15.26 14.6 15.19 14.86 15.42C15.12 15.64 15.28 15.93 15.44 16.09C15.61 16.24 16.14 16.53 16.58 16.41C16.99 16.28 17.61 15.72 17.73 15.48C17.84 15.24 17.84 15.02 17.65 15.14Z"/></svg>
+    </a>
+
+    <!-- Copy Toast Notification -->
+    <div id="copy-toast" role="alert" aria-live="polite">Email copied! 🚀</div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p style="font-size: 0.9rem;">© 2025 Fahimul Islam Fahim — All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ======================================= -->
+    <!-- JavaScript Logic (ES Module)            -->
+    <!-- ======================================= -->
+    <script type="module">
+        /* ===== Configuration & Utility ===== */
+        const EMAIL = 'austfahim@gmail.com';
+        const THROTTLE_LIMIT = 50; 
+        let lastThrottle = 0;
+
+        /**
+         * Sets the theme and persists choice in localStorage.
+         * @param {string} mode - 'dark' or 'light'
+         */
+        const setTheme = (mode) => {
+            const isDark = mode === 'dark';
+            document.body.dataset.theme = mode;
+            const sunIcon = document.querySelector('.theme-sun-icon');
+            const moonIcon = document.querySelector('.theme-moon-icon');
+            if (sunIcon && moonIcon) {
+                sunIcon.style.display = isDark ? 'block' : 'none';
+                moonIcon.style.display = isDark ? 'none' : 'block';
+            }
+            try { localStorage.setItem('theme', mode); } catch (e) { console.error("LS Error:", e); }
+        };
+
+        const initTheme = () => {
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            let storedTheme;
+            try { storedTheme = localStorage.getItem('theme'); } catch (e) { storedTheme = null; }
+            
+            let initialTheme = 'dark';
+            if (storedTheme) {
+                initialTheme = storedTheme;
+            } else if (!systemPrefersDark) {
+                initialTheme = 'light';
+            }
+            setTheme(initialTheme);
+        };
+
+        const handleThemeToggle = () => {
+            const currentTheme = document.body.dataset.theme;
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        };
+
+
+        /* ===== Intersection Observer (Section Reveal) ===== */
+        const initIntersectionObserver = () => {
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            if (reducedMotion) {
+                document.querySelectorAll('.reveal-section').forEach(section => section.classList.add('in-view'));
+                document.querySelectorAll('.timeline-item').forEach(item => item.classList.add('in-view'));
+                return;
+            }
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -15% 0px', 
+                threshold: 0.1
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-section').forEach(section => {
+                sectionObserver.observe(section);
+            });
+            
+            const timelineObserver = new IntersectionObserver((entries) => {
+                 entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+            
+            document.querySelectorAll('.timeline-item').forEach(item => timelineObserver.observe(item));
+        };
+
+
+        /* ===== Scroll Spy (Active Nav Link) ===== */
+        const initScrollSpy = () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            // Select all sections (excluding the floating WhatsApp)
+            const sections = Array.from(document.querySelectorAll('section'));
+            
+            const findActiveSection = () => {
+                let activeSectionId = 'home';
+                let scrollPosition = window.scrollY;
+
+                // Use the defined header height for accurate buffer calculation
+                const headerHeight = document.documentElement.style.getPropertyValue('--header-height').replace('px', '');
+                const buffer = parseInt(headerHeight, 10) + 30;
+
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    const section = sections[i];
+                    if (scrollPosition >= (section.offsetTop - buffer)) {
+                        activeSectionId = section.id;
+                        break;
+                    }
+                }
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.target === activeSectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', () => {
+                const now = Date.now();
+                if (now - lastThrottle > THROTTLE_LIMIT) {
+                    window.requestAnimationFrame(findActiveSection);
+                    lastThrottle = now;
+                }
+            });
+            // Also run on resize to adjust offsets
+            window.addEventListener('resize', () => {
+                 window.requestAnimationFrame(findActiveSection);
+            });
+
+
+            window.requestAnimationFrame(findActiveSection);
+        };
+
+
+        /* ===== Copy to Clipboard & Toast ===== */
+        const initCopyClipboard = () => {
+            const copyBtn = document.getElementById('contact-copy-btn');
+            const toast = document.getElementById('copy-toast');
+            
+            if (copyBtn) {
+                copyBtn.addEventListener('click', () => {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = EMAIL;
+                    textarea.style.position = 'fixed'; 
+                    textarea.style.top = '-9999px';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    
+                    let successful = false;
+                    try {
+                        // Use execCommand for broader compatibility within iframes
+                        successful = document.execCommand('copy');
+                        toast.textContent = successful ? 'Email copied! 🚀' : 'Copy failed. Try manual copy.';
+                    } catch (err) {
+                        toast.textContent = 'Copy failed. Try manual copy.';
+                        console.error("Copy error:", err);
+                    }
+                    
+                    document.body.removeChild(textarea);
+
+                    toast.classList.add('show');
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 2000);
+                });
+            }
+        };
+
+
+        /* ===== Subtle Parallax/Tilt on Portfolio Cards (rAF) ===== */
+        const initCardTilt = () => {
+            const cards = document.querySelectorAll('.portfolio-card[data-tilt="true"]');
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (reducedMotion || cards.length === 0) return;
+
+            const maxTilt = 3;
+            const shadowMultiplier = 0.4;
+            const perspective = 1000;
+
+            const updateTilt = (card, event) => {
+                const rect = card.getBoundingClientRect();
+                const mouseX = event.clientX || (event.touches ? event.touches[0].clientX : rect.left + rect.width / 2);
+                const mouseY = event.clientY || (event.touches ? event.touches[0].clientY : rect.top + rect.height / 2);
+
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                const offsetX = (mouseX - centerX) / (rect.width / 2);
+                const offsetY = (mouseY - centerY) / (rect.height / 2);
+
+                const rotateX = -offsetY * maxTilt;
+                const rotateY = offsetX * maxTilt;
+
+                card.style.transform = `perspective(${perspective}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
+                
+                const shadowX = Math.round(rotateY * shadowMultiplier);
+                const shadowY = Math.round(10 + Math.abs(rotateX) * shadowMultiplier);
+                card.style.boxShadow = `${shadowX}px ${shadowY}px 20px rgba(0, 0, 0, 0.4)`;
+                card.style.willChange = 'transform, box-shadow'; /* Optimization */
+            };
+
+            const resetTilt = (card) => {
+                card.style.transition = 'transform 0.4s ease-out, box-shadow 0.4s ease-out';
+                card.style.transform = `perspective(${perspective}px) rotateX(0) rotateY(0) scale(1)`;
+                card.style.boxShadow = 'var(--shadow)';
+                card.style.willChange = 'auto';
+            };
+
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => card.style.transition = 'none'); 
+                card.addEventListener('mousemove', (e) => window.requestAnimationFrame(() => updateTilt(card, e)));
+                card.addEventListener('mouseleave', () => resetTilt(card));
+                
+                // Touch events for mobile/tablet (FIXED: added passive false for prevention)
+                card.addEventListener('touchstart', (e) => {
+                    card.style.transition = 'none';
+                    if (e.touches.length === 1) { /* e.preventDefault(); */ updateTilt(card, e); }
+                }, { passive: true });
+                card.addEventListener('touchmove', (e) => {
+                    if (e.touches.length === 1) { /* e.preventDefault(); */ window.requestAnimationFrame(() => updateTilt(card, e)); }
+                }, { passive: true });
+                card.addEventListener('touchend', () => resetTilt(card));
+            });
+        };
+
+
+        /* ===== Initialize App ===== */
+        window.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            document.getElementById('theme-toggle').addEventListener('click', handleThemeToggle);
+            initIntersectionObserver();
+            initScrollSpy();
+            initCopyClipboard();
+            initCardTilt();
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        // Calculate offset considering the sticky header height
+                        const headerHeight = document.documentElement.style.getPropertyValue('--header-height').replace('px', '');
+                        const offset = parseInt(headerHeight, 10);
+                        
+                        const targetPosition = targetElement.offsetTop - offset;
+
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+        
+        window.addEventListener('load', () => {
+            // Trigger scroll on load to fix initial nav state and run animations immediately on screen
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 100);
+        });
+    </script>
+</body>
+</html>
